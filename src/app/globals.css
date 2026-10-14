@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+/*
+ * ─────────────────────────────────────────────────────────────
+ *  رموز التصميم — DESIGN TOKENS
+ *  Sedes Scholarium · Brand Identity Guidelines v1 (2026)
+ *
+ *  Official palette (guide p.9):
+ *    Regal Blue        #0a0931 #1e2d6b #304aad #3b5bd6 #71b3f0
+ *    Lavender Lilac    #585795 #9c9dc7 #d2d3fb
+ *    Old Hollywood Gray #3b3b3b #636363 #b5b5b5 #d9d9d9
+ *
+ *  Components use semantic token names, never raw hex. Historic names
+ *  are kept so every component keeps working:
+ *    deep      → navy #0a0931          (headings, dark sections)
+ *    teal      → royal blue #304aad    (links, interactive accents)
+ *    sand      → star blue #71b3f0     (ornaments / accents on navy)
+ *    sand-ink  → lilac #585795         (eyebrows, small labels on light)
+ *    ivory     → white                 (page, light text on navy)
+ * ─────────────────────────────────────────────────────────────
+ */
+:root {
+  /* Official palette */
+  --sedes-navy: #0a0931;
+  --sedes-indigo: #1e2d6b;
+  --sedes-royal: #304aad;
+  --sedes-blue: #3b5bd6;
+  --sedes-sky: #71b3f0;
+  --sedes-lilac-deep: #585795;
+  --sedes-lilac: #9c9dc7;
+  --sedes-lilac-soft: #d2d3fb;
+  --sedes-gray-900: #3b3b3b;
+  --sedes-gray-700: #636363;
+  --sedes-gray-400: #b5b5b5;
+  --sedes-gray-200: #d9d9d9;
+
+  /* Semantic roles */
+  --brand-deep: var(--sedes-navy);
+  --brand-teal: var(--sedes-royal);
+  --brand-sand: var(--sedes-sky);
+  --brand-ivory: #ffffff;
+  --brand-charcoal: var(--sedes-gray-900);
+  --brand-sand-ink: var(--sedes-lilac-deep);
+  --brand-sand-soft: var(--sedes-lilac-soft);
+  /* quiet fills (chips, hovers, member pills) — the official lilac */
+  --brand-teal-soft: var(--sedes-lilac-soft);
+
+  /*
+   * Backgrounds use ONLY official colours (no derived shades), following the
+   * official team chart (Sedes Scholarium V2):
+   *   #d9d9d9 gray    the continuous page background (<main class="surface-gray">)
+   *   white           cards and reading surfaces only
+   *   navy / royal / blue / indigo   heroes, rounded feature panels, bars, footer
+   *   #71b3f0 sky     stars, rules, small details
+   *   #d2d3fb lilac   very small accents only (chips, badges, icons) — never a
+   *                   full section background
+   */
+  --band-sand: var(--sedes-lilac-soft);
+  --surface: #ffffff;
+  --surface-muted: var(--sedes-gray-200);
+  --line: rgb(10 9 49 / 0.12);
+  --line-strong: rgb(10 9 49 / 0.24);
+  --muted: var(--sedes-gray-700);
+
+  /* Shape & motion */
+  --radius-card: 1rem;
+  --radius-control: 0.625rem;
+  --shadow-card: 0 1px 2px rgb(10 9 49 / 0.05), 0 4px 16px -8px rgb(10 9 49 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(10 9 49 / 0.06), 0 16px 32px -16px rgb(30 45 107 / 0.32);
+}
+
+@theme inline {
+  --color-deep: var(--brand-deep);
+  --color-indigo: var(--sedes-indigo);
+  --color-royal: var(--sedes-royal);
+  --color-blue: var(--sedes-blue);
+  --color-sky: var(--sedes-sky);
+  --color-lilac: var(--sedes-lilac);
+  --color-lilac-soft: var(--sedes-lilac-soft);
+  --color-teal: var(--brand-teal);
+  --color-sand: var(--brand-sand);
+  --color-sand-ink: var(--brand-sand-ink);
+  --color-sand-soft: var(--brand-sand-soft);
+  --color-teal-soft: var(--brand-teal-soft);
+  --color-ivory: var(--brand-ivory);
+  --color-ink: var(--brand-charcoal);
+  --color-band-sand: var(--band-sand);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-muted: var(--muted);
+
+  /*
+   * "Noto Sans" (loaded by next/font with the Latin subset only) comes first,
+   * so Latin text uses it and Arabic falls through to Cairo. It is named
+   * directly instead of var(--font-noto): that variable also carries a
+   * generated local fallback covering ALL characters, which would capture
+   * Arabic before Cairo.
+   */
+  --font-sans: "Noto Sans", var(--font-cairo), "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-display: "Noto Sans", var(--font-cairo), sans-serif;
+  --font-latin: "Noto Sans", var(--font-cairo), sans-serif;
+
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+}
+@layer base {
+  html {
+    background: var(--brand-ivory);
+    color: var(--brand-charcoal);
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 7rem;
+  }
+  body {
+    background: var(--brand-ivory);
+    font-feature-settings: "kern";
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--brand-sand-soft);
+    color: var(--brand-deep);
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-teal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--brand-sand);
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+    line-height: 1.35;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/*
+ * ── Layout system ──────────────────────────────────────────────
+ * ONE centred outer container (76rem) with shared gutters for every page.
+ *  - container-page    grids, card lists, the knowledge map, hubs
+ *  - container-reading the same outer container, but each direct child is
+ *                      capped to a reading measure. In RTL a capped block
+ *                      sits at the inline-start, so editorial content is
+ *                      anchored to the RIGHT of the page grid, with
+ *                      breathing room toward the left — never a narrow
+ *                      column floating in the middle.
+ * Headers and bodies of a page use the same container, so breadcrumbs,
+ * titles, dividers and content share one right edge.
+ */
+@utility container-page {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@utility container-reading {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+  /* Reading measure, anchored at the inline-start (right in RTL). */
+  & > * {
+    max-width: 52rem;
+  }
+}
+
+/* Section marker: the identity's star followed by a short rule (star at the
+   inline-start, i.e. on the right in RTL). */
+@utility section-rule {
+  display: block;
+  height: 0.875rem;
+  width: 3.5rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 14'%3E%3Cpath d='M49 0Q50.1 5.9 56 7Q50.1 8.1 49 14Q47.9 8.1 42 7Q47.9 5.9 49 0Z' fill='%2371b3f0'/%3E%3Crect x='0' y='6.25' width='38' height='1.5' rx='.75' fill='%233b5bd6'/%3E%3C/svg%3E") no-repeat;
+  background-size: contain;
+}
+
+/*
+ * Lilac section (#d2d3fb). Secondary text, labels and quiet fills are
+ * re-pointed to darker / lighter official colours inside it so contrast stays
+ * readable (gray #636363 would fall below 4.5:1 on lilac).
+ */
+@utility surface-lilac {
+  background: var(--sedes-lilac-soft);
+  --muted: var(--sedes-gray-900);
+  --brand-sand-ink: var(--sedes-indigo);
+  --brand-teal-soft: #ffffff;
+  --line: rgb(10 9 49 / 0.16);
+}
+
+/*
+ * Light-gray area (#d9d9d9) for wide list/grid backgrounds, with white cards.
+ * Full-bleed: the colour extends to the viewport edges even on a centred
+ * container (box-shadow + clip-path), without affecting layout or scrolling.
+ * Secondary text is darkened for contrast (#636363 is < 4.5:1 on this gray).
+ */
+@utility surface-gray {
+  background: var(--sedes-gray-200);
+  box-shadow: 0 0 0 100vmax var(--sedes-gray-200);
+  clip-path: inset(0 -100vmax);
+  --muted: var(--sedes-gray-900);
+  --brand-sand-ink: var(--sedes-indigo);
+  --brand-teal-soft: var(--sedes-lilac-soft);
+  --line: rgb(10 9 49 / 0.18);
+}
+
+@utility card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Honour reduced-motion everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}

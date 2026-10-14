@@ -1,0 +1,33 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# env (secrets) - never commit; only the template is kept
+.env*
+!.env.example
+
+# logs / os
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# local analytics data (development only)
+/.data/
+
+# local tooling / session settings (machine-specific)
+/.claude/
+
+# raw source material received from the initiative (not part of the site)
+/refrences/
+
+# keys / certificates
+*.pem
+*.key
+
+# Vercel CLI link (created when linking a project)
+/.vercel/
