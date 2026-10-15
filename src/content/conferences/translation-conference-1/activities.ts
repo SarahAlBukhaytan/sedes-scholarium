@@ -5,7 +5,8 @@ import { topicLinks } from "./topic-links";
 /**
  * الجلسات والورش
  *
- * - Titles, program labels, days, times and rooms: the official program image
+ * - Titles: the approved new reports (SS AR.pdf), the only source for report content.
+ * - Program labels, days, times and rooms: the official program image
  *   (source: "official-program"). They stay as the program shows them even
  *   when a report prints something different — the difference is listed in
  *   `reviewNotes` («معلومات تحتاج مراجعة») instead of being "fixed".
@@ -29,7 +30,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     kind: "session",
     sessionType: "keynote",
     programLabel: "الجلسة الرئيسة الأولى",
-    title: "صناعة الترجمة: تبادل ثقافي وتواصل عالمي",
+    title: "صناعة الترجمة: تبادل الثقافات وتواصل عالمي",
     shortTitle: "صناعة الترجمة",
     dayId: "day-1",
     start: "11:00",
@@ -38,7 +39,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     report: reports["keynote-1"],
     reviewNotes: [
       "يذكر التقرير نوع الحدث «جلسة افتتاحية»، ويدرجها البرنامج الرسمي «الجلسة الرئيسة الأولى». أُبقي تصنيف البرنامج.",
-      "عنوان التقرير «صناعة الترجمة: تبادل الثقافات وتواصل عالمي» يختلف قليلًا عن عنوان البرنامج «صناعة الترجمة: تبادل ثقافي وتواصل عالمي».",
+      "اعتُمد عنوان التقرير الجديد «…تبادل الثقافات…»؛ وكان في البرنامج «…تبادل ثقافي…».",
       "سطر التعريف بـ د. غيوم دونوفبورغ مبتور في التقرير (يبدأ بـ«ضو في الجامعة الأمريكية للمترجمين…»)، فلم يُعرض.",
       "تظهر في صفحة التقرير (PDF) بقايا نص تجريبي «rem ipsum» بجانب شريط المتحدثين.",
     ],
@@ -110,8 +111,8 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     slug: "virtual-interpreting-lab",
     conferenceId: C,
     kind: "workshop",
-    title: "بناء مختبر افتراضي للترجمة الفورية باستخدام الذكاء الاصطناعي والأدوات السحابية",
-    shortTitle: "مختبر افتراضي للترجمة الفورية",
+    title: "بناء مختبر افتراضي للترجمة الشفوية باستخدام الذكاء الاصطناعي وأدوات الحوسبة السحابية",
+    shortTitle: "مختبر افتراضي للترجمة الشفوية",
     dayId: "day-1",
     start: "13:30",
     end: "15:30",
@@ -119,7 +120,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     speakerIds: ["fahad-alhathloul"],
     report: reports["workshop-virtual-lab"],
     reviewNotes: [
-      "عنوان التقرير «…للترجمة الشفوية… وأدوات الحوسبة السحابية» يختلف عن عنوان البرنامج «…للترجمة الفورية… والأدوات السحابية».",
+      "اعتُمد عنوان التقرير الجديد «…للترجمة الشفوية… وأدوات الحوسبة السحابية»؛ وكان في البرنامج «…للترجمة الفورية… والأدوات السحابية».",
     ],
     description:
       "ورشة عمل تطبيقية يدور عنوانها حول بناء مختبر افتراضي للترجمة الفورية بالاستعانة بالذكاء الاصطناعي والأدوات السحابية.",
@@ -130,7 +131,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     slug: "llms-for-translators",
     conferenceId: C,
     kind: "workshop",
-    title: "النماذج اللغوية الكبيرة للمترجمين: التقييم والتحكيم والتصميم المشترك",
+    title: "النماذج اللغوية الكبيرة للمترجمين: التقييم والتحكيم والتصميم المشترك للترجمة الآلية كخبراء لغويين",
     shortTitle: "النماذج اللغوية الكبيرة للمترجمين",
     dayId: "day-1",
     start: "13:30",
@@ -139,7 +140,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     speakerIds: ["hind-alkhalifa"],
     report: reports["workshop-llm-translators"],
     reviewNotes: [
-      "يضيف عنوان التقرير «للترجمة الآلية كخبراء لغويين» إلى عنوان البرنامج.",
+      "اعتُمد عنوان التقرير الجديد، وهو يضيف «للترجمة الآلية كخبراء لغويين» إلى عنوان البرنامج.",
     ],
     description:
       "ورشة عمل يتناول عنوانها النماذج اللغوية الكبيرة من منظور المترجم: تقييمها، وتحكيم مخرجاتها، والتصميم المشترك للعمل معها.",
@@ -172,7 +173,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     slug: "from-translation-to-automation",
     conferenceId: C,
     kind: "workshop",
-    title: "من الترجمة إلى الأتمتة: بناء منظومات العمل الترجمية في عصر الذكاء الاصطناعي",
+    title: "من الترجمة إلى الأتمتة: بناء منظومات العمل الترجمي في عصر الذكاء الاصطناعي",
     shortTitle: "من الترجمة إلى الأتمتة",
     dayId: "day-1",
     start: "15:50",
@@ -181,7 +182,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     speakerIds: [],
     report: reports["workshop-automation"],
     reviewNotes: [
-      "عنوان التقرير «…منظومات العمل الترجمي…»، وفي البرنامج «…منظومات العمل الترجمية…».",
+      "اعتُمد عنوان التقرير الجديد «…منظومات العمل الترجمي…»؛ وكان في البرنامج «…منظومات العمل الترجمية…».",
     ],
     description:
       "ورشة عمل يدور عنوانها حول بناء منظومات العمل الترجمية وأتمتتها في عصر الذكاء الاصطناعي.",
@@ -235,7 +236,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     slug: "translators-last-word",
     conferenceId: C,
     kind: "workshop",
-    title: "الكلمة الأخيرة للمترجم: الذكاء الاصطناعي واستراتيجيات اختيار المفردات",
+    title: "الكلمة الأخيرة للمترجم: الذكاء الاصطناعي وإستراتيجيات اختيار المفردات",
     shortTitle: "الكلمة الأخيرة للمترجم",
     dayId: "day-2",
     start: "10:00",
@@ -253,8 +254,8 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     slug: "ai-interpreting-hajj",
     conferenceId: C,
     kind: "workshop",
-    title: "الذكاء الاصطناعي ومستقبل الترجمة الشفهية في سياقات الحج",
-    shortTitle: "الترجمة الشفهية في سياقات الحج",
+    title: "تطبيقات الذكاء الاصطناعي ومستقبل الترجمة الآلية في موسم الحج: التحديات والمؤشرات الميدانية",
+    shortTitle: "الترجمة الآلية في موسم الحج",
     dayId: "day-2",
     start: "11:00",
     end: "12:00",
@@ -262,7 +263,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     speakerIds: [],
     report: reports["workshop-hajj-interpreting"],
     reviewNotes: [
-      "عنوان التقرير «تطبيقات الذكاء الاصطناعي ومستقبل الترجمة الآلية في موسم الحج…» يختلف عن عنوان البرنامج «…ومستقبل الترجمة الشفهية في سياقات الحج».",    ],
+      "اعتُمد عنوان التقرير الجديد «تطبيقات الذكاء الاصطناعي ومستقبل الترجمة الآلية في موسم الحج…»؛ وكان في البرنامج «الذكاء الاصطناعي ومستقبل الترجمة الشفهية في سياقات الحج».",    ],
     description:
       "ورشة عمل يتناول عنوانها مستقبل الترجمة الشفهية في سياقات الحج في ضوء تقنيات الذكاء الاصطناعي.",
     source: "official-program",
@@ -334,7 +335,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     slug: "disability-in-literary-texts",
     conferenceId: C,
     kind: "workshop",
-    title: "ترجمة الإعاقة في النصوص الأدبية",
+    title: "ترجمة الإعاقة في النصوص الأدبية: من النظرية إلى الممارسة",
     shortTitle: "ترجمة الإعاقة في الأدب",
     dayId: "day-2",
     start: "13:00",
