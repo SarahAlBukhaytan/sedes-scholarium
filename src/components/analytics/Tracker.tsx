@@ -7,13 +7,15 @@ import { usePathname } from "next/navigation";
  * In-site tracker (privacy-friendly):
  *  - no cookies, no IP or personal data, nothing shared with third parties;
  *  - respects the browser's "Do Not Track" setting;
- *  - a visit = activity with gaps of less than 30 minutes (kept as a time
- *    stamp in localStorage, which never leaves the browser);
+ *  - a visit = one entry to the site in a browser tab. It is marked in
+ *    sessionStorage (kept per tab, never leaves the browser): refreshing the
+ *    page or moving between pages in the same tab keeps the mark, so it is
+ *    not a new visit; opening the site again in a new tab or after closing it
+ *    starts a new visit — no time window;
  *  - sends page views, active time, and clicks on elements marked with
  *    data-track-keyword / data-track-map / data-track-event.
  */
 const KEY = "ss-visit";
-const VISIT_GAP = 30 * 60 * 1000;
 
 function send(body: object) {
   const data = JSON.stringify(body);
@@ -24,17 +26,16 @@ function send(body: object) {
 }
 
 function visitState(path: string) {
-  const now = Date.now();
-  let s: { last: number; confs: string[] } | null = null;
+  let s: { confs: string[] } | null = null;
   try {
-    s = JSON.parse(localStorage.getItem(KEY) ?? "null");
+    s = JSON.parse(sessionStorage.getItem(KEY) ?? "null");
   } catch {}
-  const newVisit = !s || now - s.last > VISIT_GAP;
-  const confs = newVisit ? [] : s!.confs;
+  const newVisit = !s;
+  const confs = s?.confs ?? [];
   const conf = /^\/conferences\/([^/]+)/.exec(path)?.[1];
   const newConfVisit = Boolean(conf && !confs.includes(conf));
   try {
-    localStorage.setItem(KEY, JSON.stringify({ last: now, confs: conf && newConfVisit ? [...confs, conf] : confs }));
+    sessionStorage.setItem(KEY, JSON.stringify({ confs: conf && newConfVisit ? [...confs, conf] : confs }));
   } catch {}
   return { newVisit, newConfVisit };
 }

@@ -5,6 +5,7 @@ import { requireAdmin } from "@/lib/admin/auth";
 import { readAdminStats } from "@/lib/analytics/service";
 import { routes } from "@/lib/routes";
 import { AdminShell, Panel } from "./AdminShell";
+import { AutoRefresh } from "./AutoRefresh";
 import { DailyVisitsChart } from "./DailyVisitsChart";
 
 export const metadata: Metadata = { title: "لوحة الإدارة", robots: { index: false, follow: false } };
@@ -67,6 +68,8 @@ export default async function AdminPage() {
 
   return (
     <AdminShell session={session} active="dashboard" title="إحصاءات المنصة">
+      {/* live numbers: re-fetched every 20 seconds while this page is open */}
+      <AutoRefresh seconds={20} />
       {!stats ? (
         <div className="rounded-[var(--radius-card)] bg-surface p-6 leading-8 text-ink">
           <p className="font-semibold text-deep">مخزن الإحصاءات غير متصل في هذه البيئة.</p>
@@ -127,10 +130,17 @@ export default async function AdminPage() {
       <Panel title="عن الإحصاءات: كيف تُحتسب الأرقام" id="help-h">
         <dl className="grid gap-x-10 gap-y-5 text-[0.95rem] leading-7 text-ink md:grid-cols-2">
           <HelpItem term="الزيارة">
-            جلسة تصفّح واحدة للمنصة كاملة، مهما تعددت الصفحات التي فُتحت خلالها. تنتهي بعد 30 دقيقة دون نشاط، فإن عاد الزائر بعدها تُحتسب
-            زيارة جديدة. هذا هو الرقم الظاهر للزوار في الصفحة الرئيسية.
+            كل دخول جديد إلى المنصة يُحتسب زيارة، حتى لو عاد الزائر نفسه بعد دقائق: فتح الموقع في تبويب جديد، أو العودة إليه بعد إغلاقه.
+            أما تحديث الصفحة والتنقل بين صفحات الموقع في التبويب نفسه فيبقيان ضمن الزيارة نفسها ولا يُحتسبان زيارة جديدة. هذا هو الرقم
+            الظاهر للزوار في الصفحة الرئيسية.
           </HelpItem>
-          <HelpItem term="مشاهدة الصفحة">كل صفحة تُفتح تُحتسب مشاهدةً مستقلة، فالزيارة الواحدة تضم عادةً عدة مشاهدات.</HelpItem>
+          <HelpItem term="مشاهدة الصفحة">
+            كل صفحة تُفتح تُحتسب مشاهدةً مستقلة، بما في ذلك إعادة تحميلها، فالزيارة الواحدة تضم عادةً عدة مشاهدات.
+          </HelpItem>
+          <HelpItem term="تحديث الأرقام">
+            تُسجَّل الزيارات لحظة حدوثها، وتتحدث هذه الصفحة تلقائيًا كل 20 ثانية ما دامت مفتوحة، ويتحدث العدّاد في الصفحة الرئيسية كل 30 ثانية،
+            دون إعادة نشر الموقع أو تعديل يدوي.
+          </HelpItem>
           <HelpItem term="النطاق">تُجمع الأرقام لمنصة Sedes Scholarium كاملة، بكل مؤتمراتها وصفحاتها، ثم تُفصَّل هنا بحسب المؤتمر والصفحة.</HelpItem>
           <HelpItem term="ما لا يُحتسب">برامج الفهرسة الآلية، وصفحات لوحة الإدارة، ومن فعّل خيار «عدم التتبع» في متصفحه.</HelpItem>
           <HelpItem term="مدة التصفح">الوقت الذي تكون فيه الصفحة ظاهرة أمام الزائر، ويُسجَّل حين يغادرها أو يخفيها؛ والمتوسط = مجموع المدد ÷ عدد الزيارات.</HelpItem>

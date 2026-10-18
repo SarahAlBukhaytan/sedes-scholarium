@@ -2,9 +2,9 @@ import { getBackend, type Op } from "./store";
 
 /**
  * تعريفات القياس — what is counted:
- *  - زيارة (visit): one browsing session of the platform. It starts with the
- *    first page opened and ends after 30 minutes without activity or when the
- *    tab is closed — however many pages are opened during it.
+ *  - زيارة (visit): one entry to the platform in a browser tab. Refreshing or
+ *    moving between pages in the same tab stays in the same visit; opening
+ *    the site in a new tab or after closing it is a new visit (no time window).
  *  - مشاهدة صفحة (page view): every page opened, so one visit usually makes
  *    several page views.
  *  - مدة التصفح: active (visible-tab) seconds per visit, averaged over visits.

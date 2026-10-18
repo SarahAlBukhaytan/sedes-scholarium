@@ -18,7 +18,7 @@ const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
  * «إجمالي زيارات المنصة» — homepage section (platform-wide total).
  *
  * The number comes from /api/stats/public (real visits of the whole platform)
- * and refreshes every minute. When the section first enters the viewport the
+ * and refreshes every 30 seconds. When the section first enters the viewport the
  * DISPLAYED number counts up from 0 to the real total once (ease-out, ~1.8 s,
  * requestAnimationFrame); later refreshes update it directly. The animation
  * is display-only — it never changes the stored count. Reduced-motion users
@@ -42,7 +42,7 @@ export function PlatformVisitCounter() {
         .then((s: Stats) => alive && setStats(s))
         .catch(() => alive && setStats({ connected: false, visits: null, since: null }));
     load();
-    const id = setInterval(load, 60_000);
+    const id = setInterval(load, 30_000);
     return () => {
       alive = false;
       clearInterval(id);
