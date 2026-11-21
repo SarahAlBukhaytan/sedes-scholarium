@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { StarGlyph, StarPattern } from "@/components/motif/StarPattern";
 import { initiative } from "@/content/site";
@@ -25,15 +23,15 @@ function WithName({ text }: { text: string }) {
 
 /**
  * «عن المبادرة» — the initiative profile («Sedes Scholarium COLS KSU.pdf»):
- * overview, vision / mission / goal, the meaning of the name and the
- * four-level organisational structure. Texts are used verbatim (site.ts).
+ * overview, vision / mission / goal and the meaning of the name. Texts are
+ * used verbatim (site.ts). The organisational structure (pp.3–4) is for
+ * internal use only and is deliberately not shown.
  */
 export default function AboutPage() {
-  const { structure } = initiative;
   return (
     <>
       <PageHeader
-        crumbs={[{ label: "الرئيسية", href: routes.home() }, { label: "عن المبادرة" }]}
+        crumbs={[{ label: "الرئيسة", href: routes.home() }, { label: "عن المبادرة" }]}
         title="عن المبادرة"
         lead={initiative.umbrella}
       />
@@ -78,51 +76,6 @@ export default function AboutPage() {
               <WithName text={initiative.naming} />
             </p>
           </div>
-        </section>
-
-        {/* Organisational structure */}
-        <section aria-labelledby="structure-h">
-          <span className="section-rule" aria-hidden="true" />
-          <h2 id="structure-h" className="mt-4 font-display text-2xl font-bold text-deep md:text-3xl">
-            الهيكل التنظيمي
-          </h2>
-          <p className="mt-3 text-lg leading-8 text-ink">{structure.intro}</p>
-
-          <ol className="mt-8 grid gap-5 lg:grid-cols-2">
-            {structure.levels.map((level, i) => (
-              <li key={level.id} className="card flex flex-col p-6 md:p-7">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-deep font-display text-lg font-bold text-sky tabular-nums">
-                    {i + 1}
-                  </span>
-                  <h3 className="font-display text-xl leading-8 font-bold text-deep">{level.title}</h3>
-                </div>
-                <p className="mt-4 text-[1.02rem] leading-8 text-ink">{level.text}</p>
-                {"list" in level && (
-                  <ul className="mt-2 list-disc space-y-1 ps-6 text-[1.02rem] leading-8 text-ink marker:text-blue">
-                    {level.list.map((x) => (
-                      <li key={x}>{x}</li>
-                    ))}
-                  </ul>
-                )}
-                {"after" in level && <p className="mt-2 text-[1.02rem] leading-8 text-ink">{level.after}</p>}
-                <h4 className="mt-6 border-s-[3px] border-blue ps-3 font-display text-base font-bold text-blue">المهام والمسؤوليات</h4>
-                <ul className="mt-3 list-disc space-y-1.5 ps-6 text-[0.98rem] leading-8 text-ink marker:text-blue">
-                  {level.tasks.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ol>
-
-          <Link
-            href={routes.team()}
-            className="group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-deep/25 bg-transparent px-5 font-semibold text-deep transition-colors hover:border-deep hover:bg-deep hover:text-ivory"
-          >
-            تعرّف على الفريق
-            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
-          </Link>
         </section>
       </div>
     </>

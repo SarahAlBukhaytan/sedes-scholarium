@@ -21,7 +21,7 @@ export default function SearchPage() {
   return (
     <>
       <PageHeader
-        crumbs={[{ label: "الرئيسية", href: routes.home() }, { label: "البحث" }]}
+        crumbs={[{ label: "الرئيسة", href: routes.home() }, { label: "البحث" }]}
         title="البحث في المنصة"
         lead="ابحث في المؤتمرات والجلسات والورش والمتحدثين والموضوعات."
         motif={false}

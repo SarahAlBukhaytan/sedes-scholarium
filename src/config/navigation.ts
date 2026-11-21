@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
  * sections are reached from each conference overview page.
  */
 export const mainNav = [
-  { href: routes.home(), label: "الرئيسية" },
+  { href: routes.home(), label: "الرئيسة" },
   { href: routes.about(), label: "عن المبادرة" },
   { href: routes.conferences(), label: "المؤتمرات" },
   { href: routes.calendar(), label: "تقويم المؤتمرات" },

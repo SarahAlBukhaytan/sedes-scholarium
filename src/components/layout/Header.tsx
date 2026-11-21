@@ -19,7 +19,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-ivory/90 backdrop-blur-md supports-[backdrop-filter]:bg-ivory/80">
       <div className="container-page flex h-16 items-center justify-between gap-2 sm:gap-4 md:h-[4.5rem]">
-        <Link href={routes.home()} aria-label={`${initiative.name} — الصفحة الرئيسية`} className="shrink-0 rounded-md">
+        <Link href={routes.home()} aria-label={`${initiative.name} — الصفحة الرئيسة`} className="shrink-0 rounded-md">
           <BrandMark />
         </Link>
 

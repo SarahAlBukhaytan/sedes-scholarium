@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "نقطة وصل" };
 export default function ContactPage() {
   return (
     <div className="container-reading pt-6 pb-20 md:pt-10">
-      <Breadcrumbs items={[{ label: "الرئيسية", href: routes.home() }, { label: "نقطة وصل" }]} />
+      <Breadcrumbs items={[{ label: "الرئيسة", href: routes.home() }, { label: "نقطة وصل" }]} />
 
       <div className="mx-auto mt-8 max-w-2xl text-center">
         <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-deep text-sky">

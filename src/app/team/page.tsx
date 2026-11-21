@@ -43,7 +43,7 @@ export default function TeamPage() {
   return (
     <>
       <PageHeader
-        crumbs={[{ label: "الرئيسية", href: routes.home() }, { label: "فريق العمل" }]}
+        crumbs={[{ label: "الرئيسة", href: routes.home() }, { label: "فريق العمل" }]}
         title="فريق العمل"
         lead="الهيكل التنظيمي للمبادرة كما ورد في ملفها الرسمي: الإشراف الأكاديمي، والرئاسة، والقيادات، والمسارات الثلاثة بأعضائها."
       />

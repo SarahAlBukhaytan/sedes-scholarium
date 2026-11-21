@@ -13,14 +13,14 @@ export default function NotFound() {
         </p>
         <h1 className="mt-4 font-display text-3xl font-bold text-deep md:text-4xl">انقطع الخيط هنا</h1>
         <p className="mt-3 max-w-lg text-lg leading-9 text-muted">
-          الصفحة التي تبحث عنها غير موجودة أو نُقلت. يمكنك العودة إلى الرئيسية، أو البحث عمّا تريد.
+          الصفحة التي تبحث عنها غير موجودة أو نُقلت. يمكنك العودة إلى الرئيسة، أو البحث عمّا تريد.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href={routes.home()}
             className="group inline-flex items-center gap-2 rounded-full bg-deep px-6 py-3 font-semibold text-ivory hover:bg-teal"
           >
-            الصفحة الرئيسية
+            الصفحة الرئيسة
             <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
           </Link>
           <Link

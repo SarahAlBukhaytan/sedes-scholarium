@@ -13,7 +13,7 @@ export function requireBundle(slug: string) {
 /** Breadcrumb trail down to a conference. */
 export function conferenceCrumbs(slug: string, title: string, trailing: Crumb[] = []): Crumb[] {
   return [
-    { label: "الرئيسية", href: routes.home() },
+    { label: "الرئيسة", href: routes.home() },
     { label: "المؤتمرات", href: routes.conferences() },
     { label: title, href: routes.conference(slug) },
     ...trailing,

@@ -12,7 +12,7 @@ export default function ConferencesPage() {
   return (
     <>
       <PageHeader
-        crumbs={[{ label: "الرئيسية", href: routes.home() }, { label: "المؤتمرات" }]}
+        crumbs={[{ label: "الرئيسة", href: routes.home() }, { label: "المؤتمرات" }]}
         title="المؤتمرات"
         lead="المؤتمرات التي ترصدها المبادرة وتترجم مضامينها وتوثّقها."
       />

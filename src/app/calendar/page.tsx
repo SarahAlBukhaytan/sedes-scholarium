@@ -19,7 +19,7 @@ export default async function CalendarPage() {
   });
   return (
     <div className="container-page pt-6 pb-20 md:pt-10">
-      <Breadcrumbs items={[{ label: "الرئيسية", href: routes.home() }, { label: "تقويم المؤتمرات" }]} />
+      <Breadcrumbs items={[{ label: "الرئيسة", href: routes.home() }, { label: "تقويم المؤتمرات" }]} />
       <div className="mx-auto mt-8 max-w-2xl text-center">
         <CalendarDays className="mx-auto size-10 text-deep" aria-hidden="true" />
         <h1 className="mt-4 font-display text-[1.85rem] leading-snug font-bold text-deep md:text-[2.6rem] md:leading-tight">تقويم المؤتمرات</h1>

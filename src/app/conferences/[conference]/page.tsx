@@ -133,7 +133,7 @@ export default async function ConferencePage({ params }: Props) {
           <Breadcrumbs
             tone="dark"
             items={[
-              { label: "الرئيسية", href: routes.home() },
+              { label: "الرئيسة", href: routes.home() },
               { label: "المؤتمرات", href: routes.conferences() },
               { label: c.shortTitle },
             ]}

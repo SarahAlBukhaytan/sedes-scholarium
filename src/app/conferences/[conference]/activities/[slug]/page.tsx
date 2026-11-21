@@ -33,20 +33,26 @@ import { activityListing, routes } from "@/lib/routes";
 type Props = { params: Promise<{ conference: string; slug: string }> };
 
 /**
- * Each activity's own report file — one page split, unchanged, from the
- * official «التقارير.pdf». Offered only when the file really exists.
+ * Report files per language: Arabic in /reports, English in /reports/en —
+ * both split, unchanged, from the official «Sedes Scholarium تقارير.pdf»
+ * (Arabic pp.3–18, English pp.20–35) and named after the activity slug.
+ * The Arabic site uses "ar"; the English site will pass "en" once published.
  */
-function reportPdf(conferenceSlug: string, activitySlug: string): string | null {
-  const rel = `/documents/${conferenceSlug}/reports/${activitySlug}.pdf`;
+type ReportLang = "ar" | "en";
+const reportDir = (conferenceSlug: string, lang: ReportLang) => `/documents/${conferenceSlug}/reports${lang === "en" ? "/en" : ""}`;
+
+/** Each activity's own report file. Offered only when the file really exists. */
+function reportPdf(conferenceSlug: string, activitySlug: string, lang: ReportLang = "ar"): string | null {
+  const rel = `${reportDir(conferenceSlug, lang)}/${activitySlug}.pdf`;
   return existsSync(path.join(process.cwd(), "public", rel)) ? rel : null;
 }
 
 /**
  * The report's page(s) as high-resolution images rendered from the same PDF
- * (public/documents/<conference>/reports/pages/, listed in pages.json).
+ * (<report dir>/pages/, listed in that directory's pages.json).
  */
-function reportPages(conferenceSlug: string, activitySlug: string): ReportPage[] {
-  const dir = `/documents/${conferenceSlug}/reports`;
+function reportPages(conferenceSlug: string, activitySlug: string, lang: ReportLang = "ar"): ReportPage[] {
+  const dir = reportDir(conferenceSlug, lang);
   const file = path.join(process.cwd(), "public", dir, "pages.json");
   if (!existsSync(file)) return [];
   const all = JSON.parse(readFileSync(file, "utf8")) as Record<string, { src: string; width: number; height: number }[]>;
