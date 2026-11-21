@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BarChart3, KeyRound, LogOut, UserCog } from "lucide-react";
+import { BarChart3, CalendarDays, KeyRound, LogOut, UserCog } from "lucide-react";
 import type { AdminSession } from "@/lib/admin/auth";
 import { logoutAction } from "./actions";
 
@@ -15,12 +15,13 @@ export function AdminShell({
   children,
 }: {
   session: AdminSession;
-  active: "dashboard" | "users" | "password";
+  active: "dashboard" | "calendar" | "users" | "password";
   title: string;
   children: ReactNode;
 }) {
   const links = [
     { key: "dashboard", href: "/admin", label: "الإحصاءات", icon: BarChart3, show: true },
+    { key: "calendar", href: "/admin/calendar", label: "تقويم المؤتمرات", icon: CalendarDays, show: session.role === "owner" },
     { key: "users", href: "/admin/accounts", label: "إدارة المستخدمين", icon: UserCog, show: session.role === "owner" },
     { key: "password", href: "/admin/password", label: "تغيير كلمة المرور", icon: KeyRound, show: true },
   ] as const;

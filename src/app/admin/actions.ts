@@ -21,6 +21,7 @@ import {
   type ManageResult,
   type Role,
 } from "@/lib/admin/auth";
+import { calendarEditable, cleanEvent, getCalendarEvents, saveCalendarEvents } from "@/lib/calendar";
 
 export async function loginAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").slice(0, 200);
@@ -92,4 +93,39 @@ export async function changePasswordAction(_prev: ActionState, formData: FormDat
     redirect("/admin/login?changed=1");
   }
   return r;
+}
+
+export type CalendarActionState = { ok?: boolean; message?: string; error?: string };
+
+/** System admins only: add / edit / delete a conference in «تقويم المؤتمرات». */
+export async function manageCalendarAction(_prev: CalendarActionState, formData: FormData): Promise<CalendarActionState> {
+  await requireAdmin("owner");
+  if (!calendarEditable()) return { ok: false, error: "مخزن البيانات غير متصل، فلا يمكن حفظ التقويم." };
+  const op = String(formData.get("op") ?? "");
+  const id = String(formData.get("id") ?? "").slice(0, 80);
+  const { events } = await getCalendarEvents();
+  let next = events;
+  let message = "";
+  if (op === "delete") {
+    if (!events.some((e) => e.id === id)) return { ok: false, error: "المؤتمر غير موجود." };
+    next = events.filter((e) => e.id !== id);
+    message = "حُذف المؤتمر من التقويم.";
+  } else if (op === "save") {
+    const raw = Object.fromEntries([...formData.entries()].map(([k, v]) => [k, typeof v === "string" ? v : ""]));
+    const result = cleanEvent({ ...raw, sedes: formData.get("sedes") === "on" });
+    if (!result.ok) return { ok: false, error: result.error };
+    const exists = events.some((e) => e.id === result.event.id);
+    next = exists ? events.map((e) => (e.id === result.event.id ? result.event : e)) : [...events, result.event];
+    message = exists ? "حُفظت تعديلات المؤتمر." : "أُضيف المؤتمر إلى التقويم.";
+  } else {
+    return { ok: false, error: "عملية غير معروفة." };
+  }
+  try {
+    await saveCalendarEvents(next);
+  } catch {
+    return { ok: false, error: "تعذّر الحفظ في مخزن البيانات. حاولي مرة أخرى." };
+  }
+  revalidatePath("/admin/calendar");
+  revalidatePath("/calendar");
+  return { ok: true, message };
 }

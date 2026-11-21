@@ -4,6 +4,9 @@ import type { ActivityVariant } from "./labels";
 export const routes = {
   home: () => "/",
   aboutSection: () => "/#about",
+  about: () => "/about",
+  contact: () => "/contact",
+  calendar: () => "/calendar",
   team: () => "/team",
   search: (q?: string) => (q ? `/search?q=${encodeURIComponent(q)}` : "/search"),
   conferences: () => "/conferences",

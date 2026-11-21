@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Landmark } from "lucide-react";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { PlatformVisitCounter } from "@/components/analytics/PlatformVisitCounter";
 import { StarGlyph, StarPattern } from "@/components/motif/StarPattern";
@@ -15,8 +15,7 @@ export default function HomePage() {
         <StarPattern tone="dark" className="absolute inset-0 h-full w-full" />
         <div className="container-page relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div className="animate-fade-up">
-            <p className="text-sm font-semibold text-sand md:text-base">{initiative.umbrella}</p>
-            <h1 className="mt-4">
+            <h1>
               <bdi
                 dir="ltr"
                 className="block text-right font-latin text-[2.1rem] leading-tight font-bold tracking-wide sm:text-5xl lg:text-[3.4rem]"
@@ -27,6 +26,7 @@ export default function HomePage() {
                 {initiative.descriptor}
               </span>
             </h1>
+            <p className="mt-3 max-w-xl text-base leading-8 font-semibold text-sand md:text-lg">{initiative.umbrella}</p>
             <Link
               href={routes.conferences()}
               className="group mt-9 inline-flex min-h-12 items-center gap-2 rounded-full bg-sand px-7 py-3 font-bold text-deep transition-colors hover:bg-ivory"
@@ -40,6 +40,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ───────── College of Language Sciences (the initiative's umbrella) ───────── */}
+      <section aria-labelledby="college-h" className="container-page pt-10 md:pt-14">
+        <div className="mx-auto max-w-3xl rounded-[1.5rem] bg-surface px-6 py-9 text-center shadow-card md:px-12 md:py-11">
+          <Landmark className="mx-auto size-9 text-royal" aria-hidden="true" />
+          <h2 id="college-h" className="mt-4 font-display text-2xl font-bold text-deep md:text-3xl">
+            {initiative.college.name}
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-[1.05rem] leading-9 text-ink md:text-lg md:leading-9">{initiative.college.text}</p>
+          <a
+            href={initiative.college.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-7 inline-flex min-h-12 items-center gap-2 rounded-full bg-deep px-7 py-3 font-bold text-ivory transition-colors hover:bg-royal"
+          >
+            {initiative.college.cta}
+            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
+            <span className="sr-only">(يفتح موقع الكلية في تبويب جديد)</span>
+          </a>
+        </div>
+      </section>
+
       {/* ───────── About ───────── */}
       <section id="about" aria-labelledby="about-h" className="scroll-mt-24">
         <div className="container-page grid gap-10 py-14 md:py-20 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
@@ -49,6 +70,13 @@ export default function HomePage() {
               عن المبادرة
             </h2>
             <p className="mt-5 text-lg leading-9 text-ink md:text-[1.15rem] md:leading-[2.2rem]">{initiative.definition}</p>
+            <Link
+              href={routes.about()}
+              className="group mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-deep/25 bg-transparent px-5 font-semibold text-deep transition-colors hover:border-deep hover:bg-deep hover:text-ivory"
+            >
+              المزيد عن المبادرة
+              <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
+            </Link>
           </div>
           <dl className="space-y-8 border-s border-line-strong ps-7 md:ps-9">
             {[
@@ -100,26 +128,30 @@ export default function HomePage() {
 
       {/* ───────── Team ───────── */}
       <section aria-labelledby="team-h">
-        <div className="container-page grid gap-8 py-14 md:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-14">
-          <div>
+        <div className="container-page py-14 md:py-20">
+          <div className="max-w-2xl">
             <span className="section-rule" aria-hidden="true" />
             <h2 id="team-h" className="mt-4 font-display text-3xl font-bold text-deep md:text-4xl">
               فريق العمل
             </h2>
-            <p className="mt-4 max-w-md text-lg leading-8 text-ink">
-              تعمل المبادرة عبر ثلاثة مسارات تتكامل في إعداد المادة المعرفية.
+            <p className="mt-4 text-lg leading-8 text-ink">
+              يقود المبادرة فريق تأسيسي بإشراف أكاديمي، وتتكامل أعمالها عبر ثلاثة مسارات متخصصة في إنتاج المخرج المعرفي
+              للمؤتمرات، وإبرازه في صورة رقمية.
             </p>
-            <Link
-              href={routes.team()}
-              className="group mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-deep/25 bg-transparent px-5 font-semibold text-deep transition-colors hover:border-deep hover:bg-deep hover:text-ivory"
-            >
-              تعرّف على الفريق
-              <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
-            </Link>
           </div>
-          <ul className="grid gap-4 sm:grid-cols-3">
+          <ul className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+            {[
+              ...(team.supervision ? [{ id: "supervision", title: team.supervision.role, name: team.supervision.name }] : []),
+              ...team.head.map((h) => ({ id: h.id ?? h.name, title: h.role, name: h.name })),
+            ].map((p) => (
+              <li key={p.id} className="relative flex flex-col overflow-hidden rounded-[var(--radius-card)] bg-deep p-6 text-ivory lg:col-span-3">
+                <StarGlyph color="var(--sedes-sky)" className="size-5" />
+                <span className="mt-4 text-sm leading-6 font-semibold text-sand">{p.title}</span>
+                <span className="mt-1.5 font-display text-xl leading-8 font-bold">{p.name}</span>
+              </li>
+            ))}
             {team.tracks.map((t) => (
-              <li key={t.id} className="relative flex flex-col overflow-hidden rounded-[var(--radius-card)] bg-surface p-6">
+              <li key={t.id} className="relative flex flex-col overflow-hidden rounded-[var(--radius-card)] bg-surface p-6 last:sm:col-span-2 lg:col-span-2 last:lg:col-span-2">
                 <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-blue" />
                 <StarGlyph className="size-5" />
                 <span className="mt-4 font-display text-lg leading-8 font-bold text-deep">{t.name}</span>
@@ -128,9 +160,17 @@ export default function HomePage() {
                     قائدة المسار: <span className="font-semibold text-ink">{t.leader.name}</span>
                   </span>
                 )}
+                <span className="mt-1 text-sm leading-6 text-muted">وأعضاء المسار</span>
               </li>
             ))}
           </ul>
+          <Link
+            href={routes.team()}
+            className="group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-deep/25 bg-transparent px-5 font-semibold text-deep transition-colors hover:border-deep hover:bg-deep hover:text-ivory"
+          >
+            تعرّف على الفريق
+            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
+          </Link>
         </div>
       </section>
 

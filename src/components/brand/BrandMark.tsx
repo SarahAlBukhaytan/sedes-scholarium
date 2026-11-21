@@ -36,10 +36,10 @@ export function BrandMark({
     return <Image src={m.src} width={m.width} height={m.height} alt="" aria-hidden="true" priority={priority} className={className} />;
   }
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <Image src={m.src} width={m.width} height={m.height} alt="" aria-hidden="true" priority className="h-9 w-auto md:h-10" />
+    <span className={`inline-flex items-center gap-1.5 min-[360px]:gap-2 sm:gap-2.5 ${className}`}>
+      <Image src={m.src} width={m.width} height={m.height} alt="" aria-hidden="true" priority className="h-7 w-auto min-[360px]:h-8 sm:h-9 md:h-10" />
       <span className="flex flex-col leading-none">
-        <bdi dir="ltr" className={`font-latin text-[0.95rem] font-bold tracking-wide md:text-base ${light ? "text-ivory" : "text-deep"}`}>
+        <bdi dir="ltr" className={`font-latin text-[0.7rem] font-bold tracking-wide min-[360px]:text-[0.84rem] sm:text-[0.95rem] md:text-base ${light ? "text-ivory" : "text-deep"}`}>
           {initiative.publicName.toUpperCase()}
         </bdi>
         <span className={`mt-1 hidden text-[0.62rem] sm:block ${light ? "text-ivory/75" : "text-muted"}`}>{initiative.descriptor}</span>

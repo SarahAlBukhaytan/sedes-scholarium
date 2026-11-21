@@ -297,6 +297,14 @@ export interface TeamRole {
   id?: string;
   role: string;
   name: string;
+  /** Personal LinkedIn profile — only when supplied in «Team LinkedIn.xlsx». */
+  linkedin?: string;
+}
+
+export interface TeamMember {
+  name: string;
+  /** Personal LinkedIn profile — only when supplied in «Team LinkedIn.xlsx». */
+  linkedin?: string;
 }
 
 export interface TeamTrack {
@@ -304,8 +312,8 @@ export interface TeamTrack {
   name: string;
   /** Omit when the leader has not been confirmed. */
   leader?: TeamRole;
-  /** Member names, listed only once publishing them is confirmed. */
-  members: string[];
+  /** Members, listed only once publishing them is confirmed. */
+  members: TeamMember[];
 }
 
 export interface TeamStructure {

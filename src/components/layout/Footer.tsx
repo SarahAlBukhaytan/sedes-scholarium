@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { StarPattern } from "@/components/motif/StarPattern";
 import { initiative } from "@/content/site";
@@ -8,8 +9,11 @@ import { routes } from "@/lib/routes";
 /** Footer links — approved wording ("الرئيسة", "فريق العمل"). */
 const platformLinks = [
   { href: routes.home(), label: "الرئيسة" },
+  { href: routes.about(), label: "عن المبادرة" },
   { href: routes.conferences(), label: "المؤتمرات" },
+  { href: routes.calendar(), label: "تقويم المؤتمرات" },
   { href: routes.team(), label: "فريق العمل" },
+  { href: routes.contact(), label: "نقطة وصل" },
   { href: routes.search(), label: "البحث" },
 ];
 
@@ -22,6 +26,14 @@ export function Footer() {
         <div>
           {/* the official logo — light variation for the navy background */}
           <BrandMark tone="light" variant="full" className="h-auto w-40 md:w-44" />
+          <p className="mt-6 text-sm font-semibold text-sand">البريد الإلكتروني الرسمي</p>
+          <a
+            href={`mailto:${initiative.email}`}
+            className="mt-2 inline-flex items-center gap-2 text-sm text-ivory/85 hover:text-ivory hover:underline"
+          >
+            <Mail className="size-4 shrink-0" aria-hidden="true" />
+            <bdi dir="ltr">{initiative.email}</bdi>
+          </a>
         </div>
         <nav aria-labelledby="footer-platform-h">
           <h2 id="footer-platform-h" className="text-sm font-semibold text-sand">

@@ -162,8 +162,7 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     speakerIds: [],
     report: reports["scientific-3"],
     reviewNotes: [
-      "يُدرج التقرير أ. مشاعل العمرو ضمن المتحدثين، ولا يذكر مديرًا للجلسة.",
-      "في الملخص «ووعيه بقرارات،.» كما طُبع في التقرير.",
+      "يُدرج التقرير د. مشاعل العمرو ضمن المتحدثين، ولا يذكر مديرًا للجلسة.",
     ],
     description: "جلسة علمية يتناول عنوانها حضور الذكاء الاصطناعي في تعليم الترجمة وإعداد المترجمين.",
     source: "official-program",
@@ -226,7 +225,6 @@ const programActivities: Omit<Activity, "topicIds" | "topicEvidence">[] = [
     report: reports["scientific-4"],
     reviewNotes: [
       "يُكتب الاسم «د. محمد البحيري» هنا، و«د. محمد البهيري» في تقرير ورشة الترجمة الذكية (ص 17)، والتعريف بهما مختلف. يُرجى التأكد.",
-      "في الملخص «أو اختزالها تختزل في مقرر…» كما طُبع في التقرير.",
     ],
     description: "جلسة علمية يتناول عنوانها العلاقة بين مناهج تعليم الترجمة واحتياجات سوق العمل.",
     source: "official-program",
