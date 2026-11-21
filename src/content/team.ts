@@ -9,7 +9,7 @@ import type { TeamStructure } from "./types";
  * first name + family name (the sheet gives three- or four-part names); the
  * tracking query string (utm_…) is removed, the profile path is unchanged.
  * Members without a row in the sheet have no link — none is guessed:
- * نجلاء النفيسي، حنين الحارثي، شهد زيدان، مناحي آل الجرو، مشاعل البخيتان.
+ * نجلاء النفيسي، ندى العتيبي، حنين الحارثي، شهد زيدان، مناحي آل الجرو، مشاعل البخيتان.
  */
 const li = (slug: string) => `https://www.linkedin.com/in/${slug}`;
 
@@ -35,6 +35,8 @@ export const team: TeamStructure = {
         { name: "لين الحمصي", linkedin: li("%D9%84%D9%8A%D9%86-%D8%A7%D9%84%D8%AD%D9%85%D8%B5%D9%8A-113274276") },
         { name: "نجلاء النفيسي" },
         { name: "منار القحطاني", linkedin: li("manar-al-qahtani-7a04742ba") },
+        // membership confirmed by the initiative (Nov 2026); listed in «COLS KSU.pdf»
+        { name: "ندى العتيبي" },
       ],
     },
     {
