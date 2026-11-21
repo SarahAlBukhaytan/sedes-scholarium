@@ -80,9 +80,9 @@ export default function HomePage() {
           </div>
           <dl className="space-y-8 border-s border-line-strong ps-7 md:ps-9">
             {[
-              { term: "رؤيتنا", text: initiative.vision },
-              { term: "رسالتنا", text: initiative.mission },
-              { term: "هدفنا", text: initiative.goal },
+              { term: "الرؤية", text: initiative.vision },
+              { term: "الرسالة", text: initiative.mission },
+              { term: "الهدف", text: initiative.goal },
             ].map((x) => (
               <div key={x.term} className="relative">
                 <StarGlyph color="var(--sedes-blue)" className="absolute top-1.5 -right-[2.35rem] size-5 bg-[var(--sedes-gray-200)] md:-right-[2.85rem]" />
