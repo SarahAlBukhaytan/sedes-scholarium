@@ -6,15 +6,15 @@ import { initiative } from "@/content/site";
 import { getConferences } from "@/lib/content";
 import { routes } from "@/lib/routes";
 
-/** Footer links — approved wording ("الرئيسة", "فريق العمل"). */
+/**
+ * «المنصة» column — approved list and order. Home, search and the
+ * conferences index stay in the header; conferences have their own column.
+ */
 const platformLinks = [
-  { href: routes.home(), label: "الرئيسة" },
   { href: routes.about(), label: "عن المبادرة" },
-  { href: routes.conferences(), label: "المؤتمرات" },
-  { href: routes.calendar(), label: "تقويم المؤتمرات" },
   { href: routes.team(), label: "فريق العمل" },
+  { href: routes.calendar(), label: "تقويم المؤتمرات" },
   { href: routes.contact(), label: "نقطة وصل" },
-  { href: routes.search(), label: "البحث" },
 ];
 
 export function Footer() {
@@ -22,11 +22,11 @@ export function Footer() {
   return (
     <footer className="on-dark relative overflow-hidden border-t-2 border-sky bg-deep text-ivory">
       <StarPattern tone="dark" density="sparse" className="absolute inset-0 h-full w-full" />
-      <div className="container-page relative grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div>
+      <div className="container-page relative grid grid-cols-2 gap-x-8 gap-y-10 py-12 md:grid-cols-[1.4fr_1fr_1.2fr] md:gap-x-12 md:py-14">
+        <div className="col-span-2 md:col-span-1">
           {/* the official logo — light variation for the navy background */}
           <BrandMark tone="light" variant="full" className="h-auto w-40 md:w-44" />
-          <p className="mt-6 text-sm font-semibold text-sand">البريد الإلكتروني الرسمي</p>
+          <p className="mt-5 text-sm font-semibold text-sand">البريد الإلكتروني الرسمي</p>
           <a
             href={`mailto:${initiative.email}`}
             className="mt-2 inline-flex items-center gap-2 text-sm text-ivory/85 hover:text-ivory hover:underline"
@@ -39,7 +39,7 @@ export function Footer() {
           <h2 id="footer-platform-h" className="text-sm font-semibold text-sand">
             المنصة
           </h2>
-          <ul className="mt-3 space-y-2 text-sm">
+          <ul className="mt-4 space-y-2.5 text-sm leading-6">
             {platformLinks.map((i) => (
               <li key={i.href}>
                 <Link href={i.href} className="text-ivory/80 hover:text-ivory hover:underline">
@@ -53,7 +53,7 @@ export function Footer() {
           <h2 id="footer-conferences-h" className="text-sm font-semibold text-sand">
             المؤتمرات
           </h2>
-          <ul className="mt-3 space-y-2 text-sm">
+          <ul className="mt-4 space-y-2.5 text-sm leading-6">
             {conferences.map((c) => (
               <li key={c.id}>
                 <Link href={routes.conference(c.slug)} className="text-ivory/80 hover:text-ivory hover:underline">
